@@ -1,0 +1,73 @@
+<div class="m-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Add new Meditation</h2>
+    </div>
+    <div class="card-body">
+      <form #MeditationForm="ngForm">
+        <div class="mb-3">
+          <label for="txtTitle">Title</label>
+          <input id="txtTitle" type="text" class="form-control"
+                 name="txtTitle"
+                 [(ngModel)]="meditation.Title"
+                 #Title="ngModel"
+          >
+          @if(Title.invalid && (Title.touched || Title.dirty)){
+            @if(Title.errors?.['required']){
+              <small class="text-danger"> Title is required</small><br>
+
+            }
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="txtBibleName">Bible</label>
+          <input id="txtBibleName" type="text" class="form-control"
+                 name="txtBibleName"
+                 [(ngModel)]="meditation.BibleName"
+                 #BibleName="ngModel"
+          >
+        </div>
+        <div class="mb-3">
+          <label for="txtChapter">Chapter</label>
+          <input id="txtChapter" type="text" class="form-control"
+                 name="txtChapter"
+                 [(ngModel)]="meditation.Chapter"
+                 #Chapter="ngModel"
+          >
+        </div>
+        <div class="mb-3">
+          <label for="txtVerses">Verses</label>
+          <textarea id="txtVerses" class="form-control"
+                 name="txtBible" rows="4" cols="50"
+                 [(ngModel)]="meditation.Verse"
+                 #Verses="ngModel"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="dtpDateOfMeditation">Date</label>
+          <input id="dtpDateOfMeditation" type="datetime-local" class="form-control"
+                 name="dtpDateOfMeditation"
+                 [(ngModel)]="meditation.dateOfMeditation"
+                 #Date="ngModel"
+          >
+        </div>
+        <div class="mb-3">
+          <label for="txtMeditation">Your Meditation about this verses</label>
+          <textarea id="txtMeditation" class="form-control"
+                    name="txtMeditation" rows="10" cols="50"
+                    [(ngModel)]="meditation.meditationText"
+                    #MeditationText="ngModel"
+          ></textarea>
+          @if(MeditationText.invalid && (MeditationText.touched || MeditationText.dirty)){
+            @if(MeditationText.errors?.['required']){
+              <small class="text-danger"> Meditation Text is required</small><br>
+            }
+          }
+        </div>
+        <button type="button" id="btnAdd" class="btn btn-primary" (click)="onAddClick()">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+

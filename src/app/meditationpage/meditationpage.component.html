@@ -1,1 +1,31 @@
-<p>meditationpage works!</p>
+<div class="m-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>List of Meditations</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        @for (meditation of meditations;track $index) {
+          <li class="list-group-item">
+            <button type="button" id="btnModify" class="btn btn-primary btn-sm me-4"
+                    (click)="onModifyClick(meditation)">
+              Modify
+            </button>
+
+            <button type="button" id="btnDelete" class="btn btn-danger btn-sm me-4"
+                    (click)="onDeleteClick(meditation)">
+              Delete
+            </button>
+            {{ meditation.Title }}
+            <span class="badge bg-secondary" style="float: right">{{ meditation.dateOfMeditation }}</span>
+          </li>
+        } @empty {
+          <h4>No Meditations found</h4>
+        }
+      </ul>
+    </div>
+    <div class="card-footer">
+
+    </div>
+  </div>
+</div>

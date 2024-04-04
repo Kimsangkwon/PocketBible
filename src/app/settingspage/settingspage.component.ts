@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {BibledatabaseService} from "../../services/bibledatabase.service";
 
 @Component({
   selector: 'app-settingspage',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './settingspage.component.css'
 })
 export class SettingspageComponent {
-
+  database = inject(BibledatabaseService);
+  onCreateDatabaseClick() {
+    this.database.initDatabase();
+  }
 }
