@@ -9,14 +9,15 @@ export class DatabaseService {
   constructor() { }
   initDatabase(){
     this.createDatabase().then(data=>{
-      console.log("Database created successfully: " + data)
+      console.log("Meditation Database created successfully: " + data)
     }).catch(e=>{
-      console.log("Error in database creation: " + e.message)
+      console.log("Error in Meditation database creation: " + e.message)
     })
+
   }
   createDatabase(): Promise<any> {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open("MeditationDB", 2);
+      const request = indexedDB.open("AppDB", 5);
 
       request.onerror = (event) => {
         console.error("Error in creating database!");
@@ -34,6 +35,10 @@ export class DatabaseService {
         // @ts-ignore
         this.db = event.target.result;
         const meditationStore = this.db.createObjectStore("Meditations", {
+          keyPath: "id",
+          autoIncrement: true,
+        });
+        const friendStore = this.db.createObjectStore("Friends", {
           keyPath: "id",
           autoIncrement: true,
         });

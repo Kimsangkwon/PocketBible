@@ -41,4 +41,11 @@ export class MeditationpageComponent {
         console.log(err);
       })
   }
+  onMeditateClick(){
+    localStorage.setItem('selectedVerses', "");
+    localStorage.setItem('selectedBibleName', "");
+    localStorage.setItem('selectedChapter', "");
+    this.router.navigate(['/addMeditation']);
+
+  }
 }

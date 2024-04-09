@@ -19,21 +19,29 @@ export class AddMeditationComponent {
   dal = inject(MeditationDALService);
    selectedBibleName = localStorage.getItem("selectedBibleName")||"";
   selectedChapter = localStorage.getItem("selectedChapter")||"";
-  selectedVerses = JSON.parse(localStorage.getItem("selectedVerses")||"");
-  versesText = this.selectedVerses.join('\n');
-  rt = inject(Router);
+   storedVerses = localStorage.getItem("selectedVerses");
+   selectedVerses = this.storedVerses && this.storedVerses.trim() !== "" ? JSON.parse(this.storedVerses) : "";
+  router = inject(Router);
 
-  meditation : Meditation = new Meditation("", this.selectedBibleName, this.selectedChapter, this.versesText, "", "")
+  meditation : Meditation = new Meditation()
   constructor() {
+    this.meditation.BibleName = this.selectedBibleName;
+    this.meditation.Chapter = this.selectedChapter;
+    this.meditation.Verse = this.selectedVerses;
   }
   onAddClick() {
     this.dal.insert(this.meditation).then((data) => {
       console.log(data);
+
       alert("Record added successfully");
     }).catch(e => {
       console.log("error " + e.message)
-    })
-    this.rt.navigate(['/meditations']);
+    });
+    localStorage.setItem("selectedBibleName", "");
+    localStorage.setItem("selectedChapter", "");
+    localStorage.setItem("selectedVerses", "");
+
+    this.router.navigate(['/meditations']);
 
   }
 }

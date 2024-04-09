@@ -1,1 +1,21 @@
-<p>profilepage works!</p>
+<div class="card text-center">
+
+  <div class="card-body">
+    <div class="card-header text-center">
+      <h1>Profile</h1>
+    </div>
+    @if(name===null){
+      <p>Create new Profile</p>
+      <button type="button" class="btn btn-primary" (click)="onCreateClick()">Create</button>
+    } @else {
+      <img [src]="imgsrc" class="rounded mx-auto d-block" alt="Profile Image">
+      <h2>{{name}}</h2>
+      <h3>{{DOB}}</h3>
+      <p>{{email}}</p>
+      <button type="button" class="btn btn-primary" (click)="onEditClick()">Edit</button>
+
+    }
+
+
+  </div>
+</div>

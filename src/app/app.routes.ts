@@ -9,6 +9,10 @@ import {ProfilepageComponent} from "./profilepage/profilepage.component";
 import {ErrorpageComponent} from "./errorpage/errorpage.component";
 import {AddMeditationComponent} from "./add-meditation/add-meditation.component";
 import {EditMeditationpageComponent} from "./edit-meditationpage/edit-meditationpage.component";
+import {EditFriendpageComponent} from "./edit-friendpage/edit-friendpage.component";
+import {AddFriendpageComponent} from "./add-friendpage/add-friendpage.component";
+import {AddProfilePageComponent} from "./add-profile-page/add-profile-page.component";
+import {EditProfilePageComponent} from "./edit-profile-page/edit-profile-page.component";
 
 export const routes: Routes = [
   {path: "home", component: HomepageComponent},
@@ -19,7 +23,12 @@ export const routes: Routes = [
   {path: "friends", component: FriendspageComponent},
   {path: "profile", component: ProfilepageComponent},
   {path:"addMeditation", component:AddMeditationComponent},
-  {path:"editMeditation", component:EditMeditationpageComponent},
+  {path:"editMeditation/:id", component:EditMeditationpageComponent},
+  {path:"editFriend/:id", component:EditFriendpageComponent},
+  {path:"addFriend", component:AddFriendpageComponent},
+  {path:"createProfile", component:AddProfilePageComponent},
+  {path:"editProfile", component:EditProfilePageComponent},
+
   {path: "", redirectTo: "/home", pathMatch: "full"},
   {path: "**", component: ErrorpageComponent},
 

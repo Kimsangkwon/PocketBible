@@ -1,1 +1,33 @@
-<p>friendspage works!</p>
+<div class="m-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Friends</h2>
+      <button type="submit" class="btn btn btn-outline-primary" (click)="onNewFriendClick()">New Friend</button>
+
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        @for (friend of friends;track $index) {
+          <li class="list-group-item">
+            <button type="button" id="btnModify" class="btn btn-primary btn-sm me-4"
+                    (click)="onModifyClick(friend)">
+              Modify
+            </button>
+
+            <button type="button" id="btnDelete" class="btn btn-danger btn-sm me-4"
+                    (click)="onDeleteClick(friend)">
+              Delete
+            </button>
+            {{ friend.FriendName }}
+            <span class="badge bg-secondary" style="float: right">{{ friend.DOB }}</span>
+          </li>
+        } @empty {
+          <h4>No Friends found</h4>
+        }
+      </ul>
+    </div>
+    <div class="card-footer">
+
+    </div>
+  </div>
+</div>

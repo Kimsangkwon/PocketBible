@@ -85,20 +85,20 @@ const BIBLE_CHAPTERS_COUNT = {
 export class ScripturepageComponent implements OnInit{
   bibleText: string[] = [];
   dal = inject(BibleDalService);
-  router = inject(ActivatedRoute);
+  activatedRoute = inject(ActivatedRoute);
   bibles:Bible[] = [];
   name = "";
   chapter = "";
   text = "";
   chaptercount : number[] =[1];
   selectedVerses: string[] = [];
-  rt = inject(Router);
+  router = inject(Router);
 
 
   constructor() {}
 
   ngOnInit() {
-    this.router.queryParams.subscribe(params=>{
+    this.activatedRoute.queryParams.subscribe(params=>{
       this.name = params['name'];
       this.chapter = params['chapter'];
     });
@@ -169,7 +169,7 @@ export class ScripturepageComponent implements OnInit{
     localStorage.setItem('selectedVerses', JSON.stringify(this.selectedVerses));
     localStorage.setItem('selectedBibleName', this.name);
     localStorage.setItem('selectedChapter', this.chapter);
-    this.rt.navigate(['/addMeditation']);
+    this.router.navigate(['/addMeditation']);
   }
 
 }

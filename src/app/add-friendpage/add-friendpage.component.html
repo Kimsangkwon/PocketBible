@@ -1,0 +1,84 @@
+<div class="m-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Add new Friend</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="FriendForm">
+        <div class="mb-3">
+          <label for="txtName">Name</label>
+          <input id="txtName" type="text" class="form-control"
+                 name="txtName"
+                 formControlName="_friendName"
+          >
+          @if (FriendForm.controls['_friendName'].invalid) {
+            @if (FriendForm.controls['_friendName'].errors?.['required']) {
+              <small class="text-danger">Name is required</small><br>
+            }
+          }
+        </div>
+        <div class="mb-3">
+          <label for="txtPhoneNumber">Phone Number</label>
+          <input id="txtPhoneNumber" type="text" class="form-control"
+                 name="txtPhoneNumber"
+                 formControlName="_phoneNumber"
+          >
+          @if(FriendForm.controls['_phoneNumber'].invalid && (FriendForm.controls['_phoneNumber'].touched || FriendForm.controls['_phoneNumber'].dirty)){
+            @if (FriendForm.controls['_phoneNumber'].errors?.['required']) {
+              <small class="text-danger">Phone Number is required</small><br>
+            }
+            @if (FriendForm.controls['_phoneNumber'].errors?.['phoneNumberError']) {
+              <small class="text-danger">Must be a valid Phone Number</small>
+            }
+          }
+        </div>
+        <div class="mb-3">
+          <label for="txtEmail">Email</label>
+          <input id="txtEmail" type="text" class="form-control"
+                 name="txtEmail"
+                 formControlName="_email"
+          >
+          @if(FriendForm.controls['_email'].invalid && (FriendForm.controls['_email'].touched || FriendForm.controls['_email'].dirty)){
+            @if (FriendForm.controls['_email'].errors?.['required']) {
+              <small class="text-danger">email is required</small><br>
+            }
+            @if (FriendForm.controls['_email'].errors?.['email']) {
+              <small class="text-danger">Must be a valid email</small>
+            }
+          }
+        </div>
+        <div class="mb-3">
+          <label for="dtpDateOfMeditation">Date of Birth</label>
+          <input id="dtpDateOfMeditation" type="datetime-local" class="form-control"
+                 name="dtpDateOfMeditation" formControlName="_DOB"
+
+          >
+          @if(FriendForm.controls['_DOB'].invalid && (FriendForm.controls['_DOB'].touched || FriendForm.controls['_DOB'].dirty)){
+            @if (FriendForm.controls['_DOB'].errors?.['required']) {
+              <small class="text-danger">DOB is required</small><br>
+            }
+            @if (FriendForm.controls['_DOB'].errors?.['futureDateError']) {
+              <small class="text-danger">Date Of Birth must be past</small>
+            }
+          }
+        </div>
+        <div class="mb-3">
+          <label for="txtPrayerItem">Prayer Item</label>
+          <textarea id="txtPrayerItem" class="form-control"
+                    name="txtPrayerItem" rows="10" cols="30" formControlName="_prayerItem"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="txtNote">Note</label>
+          <textarea id="txtNote" class="form-control"
+                    name="txtNote" rows="10" cols="30" formControlName="_note"
+          ></textarea>
+        </div>
+        <button [disabled]="FriendForm.invalid" type="submit" class="btn btn-primary"
+                (click)="onAddClick()">Add
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

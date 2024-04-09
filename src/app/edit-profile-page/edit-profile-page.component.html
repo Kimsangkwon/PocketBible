@@ -1,0 +1,65 @@
+<div class="m-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Edit Profile</h2>
+    </div>
+    <div class="card-body">
+      <div class="text-center m-3">
+        <img [src]="imgsrc" class="rounded mx-auto d-block" alt="Profile Image">
+        <button class="btn btn-primary container-fluid" (click)="onCapturePhotoClick()">Capture photo</button>
+        <div class="m-3"></div>
+        <button class="btn btn-secondary container-fluid" (click)="onLoadFromLibraryClick()">Load from PhotoLibrary</button>
+        <div class="m-3"></div>
+      </div>
+      <form [formGroup]="ProfileForm">
+        <div class="mb-3">
+          <label for="txtUserName">Name</label>
+          <input id="txtUserName" type="text" class="form-control"
+                 name="txtUserName"
+                 formControlName="_name"
+          >
+          @if (ProfileForm.controls['_name'].invalid) {
+            @if (ProfileForm.controls['_name'].errors?.['required']) {
+              <small class="text-danger">Name is required</small><br>
+            }
+          }
+        </div>
+        <div class="mb-3">
+          <label for="dtpDateOfMeditation">Date of Birth</label>
+          <input id="dtpDateOfMeditation" type="datetime-local" class="form-control"
+                 name="dtpDateOfMeditation" formControlName="_DOB"
+
+          >
+          @if(ProfileForm.controls['_DOB'].invalid && (ProfileForm.controls['_DOB'].touched || ProfileForm.controls['_DOB'].dirty)){
+            @if (ProfileForm.controls['_DOB'].errors?.['required']) {
+              <small class="text-danger">DOB is required</small><br>
+            }
+            @if (ProfileForm.controls['_DOB'].errors?.['futureDateError']) {
+              <small class="text-danger">Date Of Birth must be past</small>
+            }
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="txtEmail">Email</label>
+          <input id="txtEmail" type="text" class="form-control"
+                 name="txtEmail"
+                 formControlName="_email"
+          >
+          @if(ProfileForm.controls['_email'].invalid && (ProfileForm.controls['_email'].touched || ProfileForm.controls['_email'].dirty)){
+            @if (ProfileForm.controls['_email'].errors?.['required']) {
+              <small class="text-danger">email is required</small><br>
+            }
+            @if (ProfileForm.controls['_email'].errors?.['email']) {
+              <small class="text-danger">Must be a valid email</small>
+            }
+          }
+        </div>
+        <button [disabled]="ProfileForm.invalid" type="submit" class="btn btn-primary"
+                (click)="onUpdateClick()">Update
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
