@@ -1,1 +1,13 @@
-<p>calendarpage works!</p>
+<div class="card text-center">
+  <div class="card-body">
+    <div class="card-header text-center">
+      <h1>Calendar</h1>
+    </div>
+    <div class="mb-4"></div>
+    <h4>Selected date: {{selectedDate| date:'EEE, MMM d, y'}}</h4>
+    <button class="btn btn-primary"  (click)="onNewMeditationClick()">New Meditation</button>
+    <section style="width: 100%;">
+      <mat-calendar (selectedChange)="onDateSelected($event)"></mat-calendar>
+    </section>
+  </div>
+</div>

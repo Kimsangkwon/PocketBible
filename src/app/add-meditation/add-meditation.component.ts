@@ -19,7 +19,10 @@ export class AddMeditationComponent {
   dal = inject(MeditationDALService);
    selectedBibleName = localStorage.getItem("selectedBibleName")||"";
   selectedChapter = localStorage.getItem("selectedChapter")||"";
-   storedVerses = localStorage.getItem("selectedVerses");
+   storedVerses = localStorage.getItem("selectedVerses")||"";
+
+   // @ts-ignore
+  selectedDate =this.getLocalDateTimeString(localStorage.getItem("selectedDate"));
    selectedVerses = this.storedVerses && this.storedVerses.trim() !== "" ? JSON.parse(this.storedVerses) : "";
   router = inject(Router);
 
@@ -28,6 +31,17 @@ export class AddMeditationComponent {
     this.meditation.BibleName = this.selectedBibleName;
     this.meditation.Chapter = this.selectedChapter;
     this.meditation.Verse = this.selectedVerses;
+    this.meditation.dateOfMeditation = this.selectedDate;
+  }
+  getLocalDateTimeString(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear().toString().padStart(4, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth()는 0부터 시작합니다.
+    const day = date.getDate().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
   }
   onAddClick() {
     this.dal.insert(this.meditation).then((data) => {
