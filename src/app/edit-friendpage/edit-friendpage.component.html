@@ -63,6 +63,24 @@
           }
         </div>
         <div class="mb-3">
+          <label for="txtAddress">Address</label>
+          <input id="txtAddress" type="text" class="form-control"
+                 name="txtAddress"
+                 formControlName="_address"
+          >
+          <div class="mb-2"></div>
+          <button class="btn btn-secondary" (click)="onLocateClick()">Locate</button>
+          <div class="mb-2"></div>
+
+          <div class="container" id="mapContainer" style="width: auto; height: 300px"></div>
+          @if(FriendForm.controls['_address'].invalid && (FriendForm.controls['_address'].touched || FriendForm.controls['_address'].dirty)){
+            @if (FriendForm.controls['_address'].errors?.['required']) {
+              <small class="text-danger">Address is required</small><br>
+            }
+          }
+
+        </div>
+        <div class="mb-3">
           <label for="txtPrayerItem">Prayer Item</label>
           <textarea id="txtPrayerItem" class="form-control"
                     name="txtPrayerItem" rows="10" cols="30" formControlName="_prayerItem"
