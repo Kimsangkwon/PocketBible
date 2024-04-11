@@ -45,6 +45,7 @@ export class MeditationpageComponent {
     localStorage.setItem('selectedVerses', "");
     localStorage.setItem('selectedBibleName', "");
     localStorage.setItem('selectedChapter', "");
+    localStorage.setItem('selectedDate', "");
     this.router.navigate(['/addMeditation']);
 
   }
