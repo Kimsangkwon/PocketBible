@@ -11,7 +11,7 @@ export class BibleDalService {
   constructor() { }
   selectAll(): Promise<Bible[]> {
     return new Promise((resolve, reject) => {
-      const transaction = this.database.db.transaction(["Bible"], "readonly"); //readonly
+      const transaction = this.database.db.transaction(["Bible"]);
 
       transaction.oncomplete = (event: any) => {
         console.log("Success: selectAll transaction successful");

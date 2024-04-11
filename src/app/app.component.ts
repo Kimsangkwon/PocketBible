@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {NavComponent} from "./nav/nav.component";
 import {DatabaseService} from "../services/database.service";
+import {BibledatabaseService} from "../services/bibledatabase.service";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,9 @@ import {DatabaseService} from "../services/database.service";
 export class AppComponent {
   title = 'PocketBible';
   database = inject(DatabaseService);
+  BibleDatabase = inject(BibledatabaseService);
   constructor() {
     this.database.initDatabase()
+    this.BibleDatabase.initDatabase()
   }
 }

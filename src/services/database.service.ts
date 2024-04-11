@@ -17,7 +17,7 @@ export class DatabaseService {
   }
   createDatabase(): Promise<any> {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open("AppDB", 5);
+      const request = indexedDB.open("PocketBibleDB", 6);
 
       request.onerror = (event) => {
         console.error("Error in creating database!");

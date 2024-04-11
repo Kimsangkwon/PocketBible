@@ -88,15 +88,12 @@ export class HomepageComponent {
   bibles: Bible[] = []
   dal = inject(BibleDalService);
   router = inject(Router);
-  isLoading: boolean = true;
   CheckData(){
     this.dal.selectAll().then(data=>{
       this.bibles = data;
-      this.isLoading = false;
     }).catch(e=>{
       console.error(e);
       this.bibles = [];
-      this.isLoading = true;
     })
   }
   onBibleChange() {
