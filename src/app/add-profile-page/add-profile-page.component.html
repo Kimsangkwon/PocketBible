@@ -5,7 +5,10 @@
     </div>
     <div class="card-body">
       <div class="text-center m-3">
-        <img [src]="imgsrc" class="rounded mx-auto d-block" alt="Profile Image">
+        <figure class="figure">
+          <img [src]="imgsrc" class="rounded mx-auto d-block" alt="Profile Image" width="50%">
+        </figure>
+        <div class="m-3"></div>
         <button class="btn btn-primary container-fluid" (click)="onCapturePhotoClick()">Capture photo</button>
       <div class="m-3"></div>
       <button class="btn btn-secondary container-fluid" (click)="onLoadFromLibraryClick()">Load from PhotoLibrary</button>

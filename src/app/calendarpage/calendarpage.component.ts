@@ -21,8 +21,11 @@ export class CalendarpageComponent {
   }
 
   onNewMeditationClick() {
-    console.log(this.selectedDate)
-    localStorage.setItem("selectedDate", this.selectedDate)
+    localStorage.setItem("selectedDate", this.selectedDate);
+    localStorage.setItem("selectedBibleName", "");
+    localStorage.setItem("selectedChapter", "");
+    localStorage.setItem("selectedVerses", "");
+
     this.router.navigate(['/addMeditation']);
   }
 }

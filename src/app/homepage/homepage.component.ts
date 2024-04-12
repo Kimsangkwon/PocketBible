@@ -88,6 +88,7 @@ export class HomepageComponent {
   bibles: Bible[] = []
   dal = inject(BibleDalService);
   router = inject(Router);
+  imgsrc = "../../assets/img/bible.png";
   CheckData(){
     this.dal.selectAll().then(data=>{
       this.bibles = data;
@@ -107,6 +108,7 @@ export class HomepageComponent {
   }
   onSearchClick() {
     if (this.selectedBible && this.selectedChapter) {
+
       this.router.navigate(['/scripture'], { queryParams: { name: this.selectedBible, chapter: this.selectedChapter } });
     }
   }

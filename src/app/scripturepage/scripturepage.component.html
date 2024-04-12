@@ -3,10 +3,11 @@
     <div class="card-header text-center">
       <h1>Find Scripture</h1>
     </div>
+    <div class="card-body">
     <form class="row g-3 " #bibleForm="ngForm">
       <div class="col-md-2">
         <label for="selectedBible" class="form-label">Bible</label>
-        <select id="selectedBible" name="selectedBible" class="form-select"[(ngModel)]="name" (change)="onBibleChange()">
+        <select id="selectedBible" name="selectedBible" class="form-select" [(ngModel)]="selectedName" (change)="onBibleChange()">
           <option value="Genesis">Genesis</option>
           <option value="Exodus">Exodus</option>
           <option value="Leviticus">Leviticus</option>
@@ -75,9 +76,9 @@
           <option value="Revelation">Revelation</option>
         </select>
         <label for="selectedChapter" class="form-label">Chapter</label>
-        <select id="selectedChapter" class="form-select"name="selectedChapter" [(ngModel)]="chapter">
+        <select id="selectedChapter" class="form-select"name="selectedChapter" [(ngModel)]="selectedChapter">
           @for (chapter of chaptercount; track $index ){
-            <option value="{{chapter}}">{{chapter}}</option>
+              <option value="{{chapter}}">{{chapter}}</option>
           }
         </select>
       </div>
@@ -90,6 +91,7 @@
       </div>
 
     </form>
+    </div>
     <div class="card-body">
       <ul class="list-group">
         @for(verse of bibleText; track $index){

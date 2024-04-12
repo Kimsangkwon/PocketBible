@@ -4,18 +4,16 @@
       <h2>Add new Meditation</h2>
     </div>
     <div class="card-body">
-      <form #MeditationForm="ngForm">
+      <form [formGroup] = "MeditationForm">
         <div class="mb-3">
           <label for="txtTitle">Title</label>
           <input id="txtTitle" type="text" class="form-control"
                  name="txtTitle"
-                 [(ngModel)]="meditation.Title"
-                 #Title="ngModel"
+                 formControlName="_title"
           >
-          @if(Title.invalid && (Title.touched || Title.dirty)){
-            @if(Title.errors?.['required']){
-              <small class="text-danger"> Title is required</small><br>
-
+          @if (MeditationForm.controls['_title'].invalid) {
+            @if (MeditationForm.controls['_title'].errors?.['required']) {
+              <small class="text-danger">Title is required</small><br>
             }
           }
         </div>
@@ -24,48 +22,48 @@
           <label for="txtBibleName">Bible</label>
           <input id="txtBibleName" type="text" class="form-control"
                  name="txtBibleName"
-                 [(ngModel)]="meditation.BibleName"
-                 #BibleName="ngModel"
+                 formControlName="_bible"
+
           >
         </div>
         <div class="mb-3">
           <label for="txtChapter">Chapter</label>
-          <input id="txtChapter" type="text" class="form-control"
+          <input id="txtChapter" type="number" class="form-control"
                  name="txtChapter"
-                 [(ngModel)]="meditation.Chapter"
-                 #Chapter="ngModel"
+                 formControlName="_chapter"
+
           >
         </div>
         <div class="mb-3">
           <label for="txtVerses">Verses</label>
           <textarea id="txtVerses" class="form-control"
                  name="txtBible" rows="4" cols="50"
-                 [(ngModel)]="meditation.Verse"
-                 #Verses="ngModel"
+                    formControlName="_verses"
+
           ></textarea>
         </div>
         <div class="mb-3">
           <label for="dtpDateOfMeditation">Date</label>
           <input id="dtpDateOfMeditation" type="datetime-local" class="form-control"
                  name="dtpDateOfMeditation"
-                 [(ngModel)]="meditation.dateOfMeditation"
-                 #Date="ngModel"
+                 formControlName="_date"
+
           >
         </div>
         <div class="mb-3">
           <label for="txtMeditation">Your Meditation about this verses</label>
           <textarea id="txtMeditation" class="form-control"
                     name="txtMeditation" rows="10" cols="50"
-                    [(ngModel)]="meditation.meditationText"
-                    #MeditationText="ngModel"
+                    formControlName="_meditation"
+
           ></textarea>
-          @if(MeditationText.invalid && (MeditationText.touched || MeditationText.dirty)){
-            @if(MeditationText.errors?.['required']){
-              <small class="text-danger"> Meditation Text is required</small><br>
+          @if (MeditationForm.controls['_meditation'].invalid) {
+            @if (MeditationForm.controls['_meditation'].errors?.['required']) {
+              <small class="text-danger">Meditation is required</small><br>
             }
           }
         </div>
-        <button type="button" id="btnAdd" class="btn btn-primary" (click)="onAddClick()">Add</button>
+        <button [disabled]="MeditationForm.invalid" type="button" id="btnAdd" class="btn btn-primary" (click)="onAddClick()">Add</button>
       </form>
     </div>
   </div>

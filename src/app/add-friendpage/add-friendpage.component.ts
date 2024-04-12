@@ -60,7 +60,6 @@ export class AddFriendpageComponent {
     });
   }
   onLocateClick(){
-    console.log(this.FriendForm.get('_address')?.value);
     // @ts-ignore
     this.geoService.geocode(this.FriendForm.get('_address')?.value).then(result => {
       const locations = result.items;
@@ -120,8 +119,7 @@ export class AddFriendpageComponent {
     this.friend.Address = this.FriendForm.get('_address')?.value;
     this.friend.PrayerItem = this.FriendForm.get('_prayerItem')?.value;
     this.friend.Note = this.FriendForm.get('_note')?.value;
-    // @ts-ignore
-    localStorage.setItem('FriendAddress', this.friend.Address);
+
     this.dal.insert(this.friend).then((data) => {
       console.log(data);
 

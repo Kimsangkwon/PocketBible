@@ -82,65 +82,61 @@ const BIBLE_CHAPTERS_COUNT = {
   templateUrl: './scripturepage.component.html',
   styleUrl: './scripturepage.component.css'
 })
-export class ScripturepageComponent implements OnInit{
+export class ScripturepageComponent{
   bibleText: string[] = [];
   dal = inject(BibleDalService);
   activatedRoute = inject(ActivatedRoute);
   bibles:Bible[] = [];
-  name = "";
-  chapter = "";
+  selectedName = "";
+  selectedChapter = "";
   text = "";
   chaptercount : number[] =[1];
   selectedVerses: string[] = [];
   router = inject(Router);
 
 
-  constructor() {}
-
-  ngOnInit() {
+  constructor() {
     this.activatedRoute.queryParams.subscribe(params=>{
-      this.name = params['name'];
-      this.chapter = params['chapter'];
-    });
-    console.log(this.name);
+    this.selectedName = params['name'];
+    this.selectedChapter = params['chapter'];
+      this.onBibleChange();
+      console.log(this.bibleText);
+  });
     this.dal.selectAll().then(data=>{
       this.bibles = data;
-      let selectedNameAndChapter = this.name + this.chapter;
+      let selectedNameAndChapter = this.selectedName + this.selectedChapter;
       console.log("selectedNameAndChapter" + selectedNameAndChapter);
       for(let i =0; i<this.bibles.length; i++){
         let nameAndChapter = this.bibles[i].name + this.bibles[i].chapter;
-        console.log(nameAndChapter)
         if(nameAndChapter == selectedNameAndChapter){
-          console.log("here2");
           this.bibleText = Object.values(this.bibles[i].text);
           console.log(this.bibleText);
         }
       }
     });
-    console.log(this.bibleText);
+
 
   }
+
   onBibleChange() {
     // @ts-ignore
-    const chapters = BIBLE_CHAPTERS_COUNT[this.name];
+    const chapters = BIBLE_CHAPTERS_COUNT[this.selectedName];
     if (chapters) {
       this.chaptercount = Array.from({ length: chapters }, (_, i) => i + 1);
     } else {
       this.chaptercount = [];
     }
+    console.log(this.chaptercount)
   }
   onSearchClick(){
     this.dal.selectAll().then(data=>{
       this.bibles = data;
-      let selectedNameAndChapter = this.name + this.chapter;
+      let selectedNameAndChapter = this.selectedName + this.selectedChapter;
       console.log("selectedNameAndChapter" + selectedNameAndChapter);
       for(let i =0; i<this.bibles.length; i++){
         let nameAndChapter = this.bibles[i].name + this.bibles[i].chapter;
-        console.log(nameAndChapter)
         if(nameAndChapter == selectedNameAndChapter){
-          console.log("here2");
           this.bibleText = Object.values(this.bibles[i].text);
-          console.log(this.bibleText);
         }
       }
     });
@@ -167,9 +163,11 @@ export class ScripturepageComponent implements OnInit{
   }
   onMeditateClick(){
     localStorage.setItem('selectedVerses', JSON.stringify(this.selectedVerses));
-    localStorage.setItem('selectedBibleName', this.name);
-    localStorage.setItem('selectedChapter', this.chapter);
+    localStorage.setItem('selectedBibleName', this.selectedName);
+    localStorage.setItem('selectedChapter', this.selectedChapter);
+    localStorage.setItem('selectedDate', "");
     this.router.navigate(['/addMeditation']);
   }
 
+  protected readonly Number = Number;
 }

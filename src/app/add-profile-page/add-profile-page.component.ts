@@ -16,8 +16,13 @@ import {CameraService} from "../../services/camera.service";
 export class AddProfilePageComponent {
   router = inject(Router);
   builder = inject(FormBuilder);
-  imgsrc:any;
+  imgsrc= localStorage.getItem('userProfileImage') ||"";
   cameraService = inject(CameraService);
+  constructor() {
+    if(this.imgsrc ==""){
+      this.imgsrc = "../../assets/img/user.png";
+    }
+  }
 
   ProfileForm = this.builder.group({
     _name: ['', [Validators.required,]],

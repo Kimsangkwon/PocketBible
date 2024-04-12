@@ -5,8 +5,18 @@
       <h1>Pocket Bible</h1>
     </div>
     @if (bibles.length===0){
+      <div class="m-3"></div>
+      <figure class="figure">
+        <img [src]="imgsrc" class="rounded mx-auto d-block" alt="Profile Image" width="50%">
+      </figure>
+      <div class="m-3"></div>
       <p class="card-text">Please Go to Settings page and push the Create Bible Database button </p>
     }@else{
+      <div class="m-3"></div>
+      <figure class="figure">
+        <img [src]="imgsrc" class="rounded mx-auto d-block" alt="Profile Image" width="50%">
+      </figure>
+      <div class="m-3"></div>
       <p class="card-text">Search the Scripture</p>
       <form #bibleForm="ngForm">
         <div class="mb-3">
