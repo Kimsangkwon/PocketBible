@@ -145,4 +145,26 @@ export class MeditationDALService {
 
     });
   }
+  deleteAll():Promise<any>{
+    return new Promise((resolve, reject)=>{
+      const transaction = this.database.db.transaction(["Meditations"], "readwrite");
+
+      transaction.oncomplete = (event: any) => {
+        console.log("Success: deleteAll transaction successful");
+      };
+      transaction.onerror = (event: any) => {
+        console.log("Error: error in deleteAll transaction: " + event);
+      };
+      const meditationStore = transaction.objectStore("Meditations");
+      const req = meditationStore.clear();
+      req.onsuccess = (event: any)=>{
+        console.log("Success: All meditations deleted successfully");
+        resolve(event);
+      }
+      req.onerror = (event: any)=>{
+        console.log("Error: Error in Meditations deleteAll");
+        reject(event);
+      }
+    })
+  }
 }

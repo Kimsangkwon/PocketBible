@@ -41,7 +41,7 @@ export class FriendDALService {
 
   selectAll(): Promise<Friend[]> {
     return new Promise((resolve, reject) => {
-      const transaction = this.database.db.transaction(["Friends"]); //readonly
+      const transaction = this.database.db.transaction(["Friends"]);
 
       transaction.oncomplete = (event: any) => {
         console.log("Success: selectAll transaction successful");
@@ -67,7 +67,7 @@ export class FriendDALService {
 
   select(id: number): Promise<any> {
     return new Promise((resolve, reject) => {
-      const transaction = this.database.db.transaction(["Friends"]); //readonly
+      const transaction = this.database.db.transaction(["Friends"]);
 
       transaction.oncomplete = (event: any) => {
         console.log("Success: select transaction successful");
@@ -144,5 +144,27 @@ export class FriendDALService {
       }
 
     });
+  }
+  deleteAll():Promise<any>{
+    return new Promise((resolve, reject)=>{
+      const transaction = this.database.db.transaction(["Friends"], "readwrite");
+
+      transaction.oncomplete = (event: any) => {
+        console.log("Success: deleteAll transaction successful");
+      };
+      transaction.onerror = (event: any) => {
+        console.log("Error: error in deleteAll transaction: " + event);
+      };
+      const friendStore = transaction.objectStore("Friends");
+      const req = friendStore.clear();
+      req.onsuccess = (event: any)=>{
+        console.log("Success: All friends deleted successfully");
+        resolve(event);
+      }
+      req.onerror = (event: any)=>{
+        console.log("Error: Error in deleteAll");
+        reject(event);
+      }
+    })
   }
 }
